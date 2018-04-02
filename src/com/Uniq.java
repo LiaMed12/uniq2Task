@@ -6,17 +6,12 @@ import java.io.*;
 
 public class Uniq {
 
-    private List<String> lines = new ArrayList<>();
     private BufferedReader reader;
     private BufferedWriter writer;
     private boolean ignoreCase;
     private int skipSymbol;
     private boolean unique;
     private boolean count;
-
-    public List<String> getLines() {
-        return lines;
-    }
 
     public static void main(String[] args) throws IOException {
         Uniq uniq = new Uniq();
@@ -81,8 +76,7 @@ public class Uniq {
                             writer.write(line);
 
                         map.put(line2, 1);
-                    }
-                    else if (count)
+                    } else if (count)
                         map.replace(line2, map.get(line2).intValue() + 1);
                     if (count)
                         lines.add(line);
@@ -91,20 +85,16 @@ public class Uniq {
             }
         } catch (EOFException ex) {
         } finally {
-            if (count)
-            {
-                for (String line: lines)
-                {
+            if (count) {
+                for (String line : lines) {
                     String line2 = getLineId(line);
 
-                    if (map.containsKey(line2))
-                    {
+                    if (map.containsKey(line2)) {
                         int cnt = map.get(line2);
 
                         if (cnt == 1)
                             writer.write(line);
-                        else
-                        {
+                        else {
                             writer.write(cnt + line);
                             map.remove(line2);
                         }
