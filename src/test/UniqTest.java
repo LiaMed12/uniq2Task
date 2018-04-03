@@ -41,6 +41,7 @@ public class UniqTest {
         }
         assertEquals("Не задан источник и приёмник данных", s);
     }
+
     @Test
     public void lineExit() throws Exception{
         Uniq u = new Uniq();
@@ -59,8 +60,9 @@ public class UniqTest {
         StringWriter sw = new StringWriter();
         u.setWriter(new BufferedWriter(sw));
         u.setIgnoreCase(true);
+        u.setUnique(true);
         u.run();
-        assertEquals("Rawraw",sw.toString());
+        assertEquals("Raw",sw.toString());
     }
 
     @Test
@@ -74,6 +76,19 @@ public class UniqTest {
         u.setUnique(true);
         u.run();
         assertEquals("napo",sw.toString());
+    }
+
+    @Test
+    public void countingTheSameRows() throws Exception{
+        Uniq u = new Uniq();
+        u.setReader(new BufferedReader(new StringReader("ra\nra")));
+        StringWriter sw = new StringWriter();
+        u.setWriter(new BufferedWriter(sw));
+        u.setIgnoreCase(true);
+        u.setUnique(true);
+        u.setCount(true);
+        u.run();
+        assertEquals("2ra", sw.toString());
     }
 
 

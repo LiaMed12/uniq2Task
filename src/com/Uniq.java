@@ -31,7 +31,7 @@ public class Uniq {
         for (int i = 0; i < args.length; i++) {
             switch (args[i]) {
                 case "-o":
-                    uniq.writer = new BufferedWriter(new FileWriter(args[i + 1]));
+                    uniq.writer = new BufferedWriter(new FileWriter(args[i+1]));
                     break;
                 case "-i":
                     uniq.ignoreCase = true;
