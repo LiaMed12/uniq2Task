@@ -117,48 +117,24 @@ public class Uniq {
         return line;
     }
 
-    public BufferedReader getReader() {
-        return reader;
-    }
-
     public void setReader(BufferedReader reader) {
         this.reader = reader;
-    }
-
-    public BufferedWriter getWriter() {
-        return writer;
     }
 
     public void setWriter(BufferedWriter writer) {
         this.writer = writer;
     }
 
-    public boolean isIgnoreCase() {
-        return ignoreCase;
-    }
-
     public void setIgnoreCase(boolean ignoreCase) {
         this.ignoreCase = ignoreCase;
-    }
-
-    public int getSkipSymbol() {
-        return skipSymbol;
     }
 
     public void setSkipSymbol(int skipSymbol) {
         this.skipSymbol = skipSymbol;
     }
 
-    public boolean isUnique() {
-        return unique;
-    }
-
     public void setUnique(boolean unique) {
         this.unique = unique;
-    }
-
-    public boolean isCount() {
-        return count;
     }
 
     public void setCount(boolean count) {

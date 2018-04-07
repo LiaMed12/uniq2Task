@@ -90,7 +90,4 @@ public class UniqTest {
         u.run();
         assertEquals("2ra", sw.toString());
     }
-
-
-
 }
