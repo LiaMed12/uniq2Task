@@ -2,6 +2,7 @@ package test;
 
 import java.io.*;
 
+import com.Run;
 import com.Uniq;
 import org.junit.*;
 
@@ -11,23 +12,25 @@ public class UniqTest {
     @Test
     public void run() throws Exception {
         Uniq u = new Uniq();
-        u.setReader(new BufferedReader(new StringReader("mer\nver\nmar")));
         StringWriter sw = new StringWriter();
         u.setWriter(new BufferedWriter(sw));
-        u.setIgnoreCase(true);
-        u.run();
+        Run r = new Run();
+        r.run(new BufferedReader(new StringReader("mer\nver\nmar")),
+                new BufferedWriter(sw = new StringWriter()),
+                true, 0, false, false);
         assertEquals("mervermar", sw.toString());
     }
 
     @Test
     public void run1() throws Exception {
         Uniq u = new Uniq();
-        u.setReader(new BufferedReader(new StringReader(" ")));
         StringWriter sw = new StringWriter();
         u.setWriter(new BufferedWriter(sw));
-        u.setIgnoreCase(true);
-        u.run();
-        assertEquals(" ", sw.toString());
+        Run r = new Run();
+        r.run(new BufferedReader(new StringReader("")),
+                new BufferedWriter(sw = new StringWriter()),
+                true, 0, false, false);
+        assertEquals("", sw.toString());
     }
 
     @Test
@@ -35,7 +38,8 @@ public class UniqTest {
         String s = null;
         try {
             Uniq u = new Uniq();
-            u.run();
+            Run r = new Run();
+            r.run(null, null, true, 0, false, false);
         } catch (IllegalStateException ex) {
             s = ex.getMessage();
         }
@@ -43,51 +47,50 @@ public class UniqTest {
     }
 
     @Test
-    public void lineExit() throws Exception{
+    public void lineExit() throws Exception {
         Uniq u = new Uniq();
-        u.setReader(new BufferedReader(new StringReader("exit")));
         StringWriter sw = new StringWriter();
         u.setWriter(new BufferedWriter(sw));
-        u.setIgnoreCase(true);
-        u.run();
-        assertEquals("",sw.toString());
+        Run r = new Run();
+        r.run(new BufferedReader(new StringReader("exit")),
+                new BufferedWriter(sw = new StringWriter()),
+                true, 0, false, false);
+        assertEquals("", sw.toString());
     }
 
     @Test
-    public void ignoringCase() throws Exception{
+    public void ignoringCase() throws Exception {
         Uniq u = new Uniq();
-        u.setReader(new BufferedReader(new StringReader("Raw\nraw")));
         StringWriter sw = new StringWriter();
         u.setWriter(new BufferedWriter(sw));
-        u.setIgnoreCase(true);
-        u.setUnique(true);
-        u.run();
-        assertEquals("Raw",sw.toString());
+        Run r = new Run();
+        r.run(new BufferedReader(new StringReader("Raw\nraw")),
+                new BufferedWriter(sw = new StringWriter()),
+                true, 1, true, false);
+        assertEquals("Raw", sw.toString());
     }
 
     @Test
-    public void ignoringSymbol() throws Exception{
+    public void ignoringSymbol() throws Exception {
         Uniq u = new Uniq();
-        u.setReader(new BufferedReader(new StringReader("napo\nwepo")));
         StringWriter sw = new StringWriter();
         u.setWriter(new BufferedWriter(sw));
-        u.setIgnoreCase(true);
-        u.setSkipSymbol(2);
-        u.setUnique(true);
-        u.run();
-        assertEquals("napo",sw.toString());
+        Run r = new Run();
+        r.run(new BufferedReader(new StringReader("napo\nwepo")),
+                new BufferedWriter(sw = new StringWriter()),
+                true, 2, true, false);
+        assertEquals("napo", sw.toString());
     }
 
     @Test
-    public void countingTheSameRows() throws Exception{
+    public void countingTheSameRows() throws Exception {
         Uniq u = new Uniq();
-        u.setReader(new BufferedReader(new StringReader("ra\nra")));
         StringWriter sw = new StringWriter();
         u.setWriter(new BufferedWriter(sw));
-        u.setIgnoreCase(true);
-        u.setUnique(true);
-        u.setCount(true);
-        u.run();
+        Run r = new Run();
+        r.run(new BufferedReader(new StringReader("ra\nra")),
+                new BufferedWriter(sw = new StringWriter()),
+                true, 0, true, true);
         assertEquals("2ra", sw.toString());
     }
 }
