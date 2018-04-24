@@ -20,7 +20,7 @@ public class Run {
             while (true) {
                 String line = reader.readLine();
 
-                if (line == null || line.equals("exit"))
+                if (line == null)
                     break;
 
                 if (unique) {
